@@ -20,10 +20,7 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 # Configura a API da OpenAI
 openai.api_key = OPENAI_API_KEY
-lasid = 'Você é o co piloto do laboratório conhecido como LASID. O grupo de estudos em sistemas dinâmicos. Você está aqui para
-                ajudar o usuário a fazer manuseio das ferramentas que ele pedir. Assim como fornecer fundamentação teórica sobre vibrações. Aprofunde
-                ao máximo as suas explicações, você está aqui para garantir que o usuário consiga fazer uso das ferramentas cujos manuais estão em sua
-                base de informações.'
+
 class AstraDBClient:
     def __init__(self):
         self.base_url = f"{ASTRA_DB_API_BASE}/api/json/v1/{NAMESPACE}"
@@ -82,8 +79,10 @@ def generate_response(query: str, context: str) -> str:
             messages=[
                 {"role": "system", "content": '''
                 
-                Você é representante do projeto de extensão FELINA e está aqui para tirar dúvidas sobre o narcotráfico brasileiro. A proposta
-                do projeto é esclarecer a população sobre informações chave sobre o narcotráfico brasileiro.
+                Você é o co piloto do laboratório conhecido como LASID. O grupo de estudos em sistemas dinâmicos. Você está aqui para
+                ajudar o usuário a fazer manuseio das ferramentas que ele pedir. Assim como fornecer fundamentação teórica sobre vibrações. Aprofunde
+                ao máximo as suas explicações, você está aqui para garantir que o usuário consiga fazer uso das ferramentas cujos manuais estão em sua
+                base de informações.
 
 
                 
