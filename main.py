@@ -11,7 +11,7 @@ load_dotenv()
 # Configurações
 EMBEDDING_MODEL = "text-embedding-3-small"
 CHAT_MODEL = "gpt-4o-mini"
-COLLECTION_NAME = os.getenv("ASTRA_DB_COLLECTION", "felina")
+COLLECTION_NAME = os.getenv("ASTRA_DB_COLLECTION")
 NAMESPACE = os.getenv("ASTRA_DB_NAMESPACE", "default_keyspace")
 EMBEDDING_DIMENSION = 1536
 ASTRA_DB_API_BASE = os.getenv("ASTRA_DB_API_ENDPOINT")
