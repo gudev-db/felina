@@ -2,7 +2,7 @@ import os
 import requests
 import streamlit as st
 from dotenv import load_dotenv
-import openai  # Importação compatível com versões mais antigas
+import openai
 from typing import List, Dict
 
 # Carrega variáveis de ambiente
@@ -10,8 +10,8 @@ load_dotenv()
 
 # Configurações
 EMBEDDING_MODEL = "text-embedding-3-small"
-CHAT_MODEL = "gpt-4o-mini"
-COLLECTION_NAME = os.getenv("ASTRA_DB_COLLECTION")
+CHAT_MODEL = "gpt-4o-mini" 
+COLLECTION_OPTIONS = ["geia128", "geia256", "geia1024NovoManual"]
 NAMESPACE = os.getenv("ASTRA_DB_NAMESPACE", "default_keyspace")
 EMBEDDING_DIMENSION = 1536
 ASTRA_DB_API_BASE = os.getenv("ASTRA_DB_API_ENDPOINT")
@@ -78,21 +78,14 @@ def generate_response(query: str, context: str) -> str:
             model=CHAT_MODEL,
             messages=[
                 {"role": "system", "content": '''
-                
                 Você é o co piloto do laboratório conhecido como LASID. O grupo de estudos em sistemas dinâmicos. Você está aqui para
                 ajudar o usuário a fazer manuseio das ferramentas que ele pedir. Assim como fornecer fundamentação teórica sobre vibrações. Aprofunde
                 ao máximo as suas explicações, você está aqui para garantir que o usuário consiga fazer uso das ferramentas cujos manuais estão em sua
                 base de informações.
-
-
-                
-                
-                
-                
                 '''},
                 {"role": "user", "content": prompt}
             ],
-            temperature=0.7
+            temperature=0.3
         )
         return response["choices"][0]["message"]["content"]
     except Exception as e:
@@ -101,6 +94,13 @@ def generate_response(query: str, context: str) -> str:
 def main():
     st.title("🤖 NeIA")
     st.write("Conectado à base de dados")
+    
+    # Seleção da coleção
+    selected_collection = st.sidebar.selectbox(
+        "Selecione a coleção:",
+        COLLECTION_OPTIONS,
+        index=0  # Define o valor padrão como o primeiro da lista
+    )
     
     # Inicializa cliente do Astra DB
     astra_client = AstraDBClient()
@@ -124,7 +124,7 @@ def main():
         # Obtém embedding e busca no Astra DB
         embedding = get_embedding(prompt)
         if embedding:
-            results = astra_client.vector_search(COLLECTION_NAME, embedding)
+            results = astra_client.vector_search(selected_collection, embedding)
             context = "\n".join([str(doc) for doc in results])
             
             # Gera resposta
