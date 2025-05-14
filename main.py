@@ -79,8 +79,8 @@ def generate_response(query: str, context: str) -> str:
             messages=[
                 {"role": "system", "content": '''
                 
-                Você é o co piloto da agência de marketing Macfor e está aqui para prover informações sobre a empresa Holambra Cooperativa. Seja atencioso e ajude o usuário a encontrar o que quer.
-
+Você é copiloto do laboratório de pesquisa em sistemas de vibrações dinâmicos LASID. Extraia de sua base de informações tudo
+de relevante para o uso do microlog. Você deve ser capaz de ajudar o usuário a atingir todos os seus objetivos.
 
                 
                 
