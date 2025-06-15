@@ -36,30 +36,30 @@ db_briefings = banco["briefings_coca"]
 with open('data.txt', 'r') as file:
     conteudo = file.read()
 
-tab_chatbot = st.tabs(   "💬 Chat Impressora 3d")
 
 
-with tab_chatbot:  
-    st.header("Chat Impressora 3d")
+
+
+st.header("Chat Impressora 3d")
     
     # Inicializa o histórico de chat na session_state
-    if "messages" not in st.session_state:
+if "messages" not in st.session_state:
         st.session_state.messages = []
     
     # Exibe o histórico de mensagens
-    for message in st.session_state.messages:
-        with st.chat_message(message["role"]):
-            st.markdown(message["content"])
+for message in st.session_state.messages:
+    with st.chat_message(message["role"]):
+        st.markdown(message["content"])
     
     # Input do usuário
-    if prompt := st.chat_input("Como posso ajudar?"):
+if prompt := st.chat_input("Como posso ajudar?"):
         # Adiciona a mensagem do usuário ao histórico
-        st.session_state.messages.append({"role": "user", "content": prompt})
-        with st.chat_message("user"):
-            st.markdown(prompt)
+    st.session_state.messages.append({"role": "user", "content": prompt})
+    with st.chat_message("user"):
+        st.markdown(prompt)
         
         # Prepara o contexto com as diretrizes
-        contexto = f"""
+    contexto = f"""
         Você é um assistente virtual especializado no uso da impressora 3d CREALITY Ender-3 V3 SE 3D Printer. Você está aqui
         para auxiliar os alunos da Cyrus a fazerem uso dela.
         ####CONTEXTO####
@@ -76,9 +76,9 @@ with tab_chatbot:
         """
         
         # Gera a resposta do modelo
-        with st.chat_message("assistant"):
-            with st.spinner('Pensando...'):
-                try:
+    with st.chat_message("assistant"):
+        with st.spinner('Pensando...'):
+            try:
                     # Usa o histórico completo para contexto
                     historico_formatado = "\n".join(
                         [f"{msg['role']}: {msg['content']}" for msg in st.session_state.messages]
@@ -94,7 +94,7 @@ with tab_chatbot:
                     # Adiciona ao histórico
                     st.session_state.messages.append({"role": "assistant", "content": resposta.text})
                     
-                except Exception as e:
+            except Exception as e:
                     st.error(f"Erro ao gerar resposta: {str(e)}")
 
 
