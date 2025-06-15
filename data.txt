@@ -1,0 +1,347 @@
+Manuals+— User Manuals Simplified.
+ CREALITY Ender-3 V3 SE 3D Printer User Manual
+ Home
+ Contents
+ » Creality
+ 1 CREALITY Ender-3 V3 SE 3D
+ Printer
+ 2 PRODUCT INFORMATION
+ 3 Assembly Procedure
+ 4 Operation and Use
+ 5 Equipment Maintenance
+ 6 Troubleshooting
+ 7 Circuit Wiring
+ 8 Documents / Resources
+ » CREALITY Ender-3 V3 SE 3D Printer User Manual 
+CREALITY Ender-3 V3 SE 3D Printer
+PRODUCT INFORMATION
+ To Our Dear Users
+ Thank you for choosing Creality. For your convenience, please read through this User Manual before you start and
+ follow the instructions provided carefully. Creality is always ready to provide you with high-quality services. If you
+ encounter any issues or have any questions when using our products, please use the contact information at the
+ end of this manual to contact us. To further improve your user experience, you can find more about our devices
+ via the following methods:
+ User manual: You can find instructions and videos in the memory card provided with the printer.
+ You can also visit our official website (https://www.creality.com
+ ) to find information regarding software,
+ hardware, contact information, device instructions, device warranty information, and more.
+ Firmware Upgrade
+ Please visit the official website https://www.creality.com, 
+click on Service Center → Firmware/Software
+ Download → Download the required firmware, install and use it.
+ Note: The manual interface is for reference only. As the functions are constantly upgraded, please refer to the
+ latest firmware/software UI on the official website.
+Videos showing the operation of the products and after-sales service
+ Videos showing the operation of the products and after-sales service For the product operation and after-sales
+ service videos, you can visit https://www.crealitycloud.com/product, 
+click on “Products” and select the right
+ model, and then click on “Related” to view the tutorials on after-sales service
+ Instructions for Use
+ 1. Do not use this printer by methods or operations that are not described in this manual, otherwise it may result
+ in accidental injury or property
+ 2. Do not place this printer near flammable materials, explosive materials or high heat sources. Please place this
+ printer in a ventilated, cool and low-dust environment.
+ 3. Do not place this printer in a vibrating or any other unstable environment, as the printing quality will be
+ compromised when the printer
+ 4. Please use the filament recommended by the manufacturer, otherwise the nozzle may be clogged or the
+ printer may be
+ 5. Please use the power cord provided with the printer and do not use the power cord of other The power plug
+ must be plugged into a three-hole socket with a ground wire.
+ 6. Do not touch the nozzle or hotbed while the printer is in operation, otherwise you may get
+ 7. Do not wear gloves or accessories while operating the printer, otherwise the moving parts may cause
+ accidental injury including cuts and
+ 8. After the printing process is complete, please use tools to clean up the filament on the nozzle while the nozzle
+ is still hot. Do not touch the nozzle with your hands when cleaning, otherwise your hands may get
+ 9. Please regularly clean the printer body with a dry cloth while the power is off, and wipe off dust, sticky printing
+ materials, and foreign objects on the guide
+ 10. Children under the age of 10 must not use this printer without adult supervision in order to avoid accidental
+ 11. This printer has a safety protection mechanism. Please do not manually move the nozzle or printing platform
+ quickly while the printer is on, otherwise the printer will automatically power off for protection.
+ 12. Users should abide by the laws and regulations of the corresponding country and region where the equipment
+ is located (place of use), abide by professional ethics, and pay attention to safety The use of our products or
+ equipment for any illegal purpose is strictly prohibited. Our compa- ny is not responsible for the relevant legal
+ responsibilitiesof any violators.
+ About the Printer
+1 Print platform
+ 5 X-axis tensioner
+ 9 Voltage regulation gear
+ 2 X-axis kit
+ 6 Display screen
+ 13
+ Coupler
+ 10 Z-axis motor
+ 3 Extruder kit
+ 7 Rotary button
+ 14
+ Type-C port
+ 11 X-axis support
+ 4 Material rack assembly 8 Power outlet
+ 15
+ Storage card sl
+ ot
+ 12 X-axis motor
+ Parts List
+ Accessory kit
+ 16
+ Power switch
+ Assembly Procedure
+Gantry Frame
+ 1. Place the gantry frame in the slot of the base, tighten it first with M3*14 screws by aligning with the holes from
+ the bottom, then use M3*8 screws to secure    it in place from the rear end of the gantry frame in the same
+ way.
+ Display Screen
+ 1. Put the display screen on the right side of the bottom assembly, align the screw holes and secure with M4*10
+ screws, then connect the display wiring;
+ TIP: The card slot on the left side of the display screen is only used for inserting a card to upgrade the screen
+ f
+ irmware.
+ Material Rack
+1. Fix the material rack assembly to the gantry frame, align the screw holes and lock it with M5*8 screws;
+ Equipment Wiring
+ CAUTION:
+ Please ensure the correct position for the power supply switch and mains before supply connection, in order to
+ avoid damage to the device.
+ If the mains between 100V and 120V, please select the 115V for the power supply switch.
+ If the mains between 200V and 240V, please select the 230V for the power supply switch (default is 230V).
+1. First, insert the extruder cable into the extruder adapter board, then secure it with the FFC fixing clip assembly;
+ 2. Follow the label instructions to secure the extruder cable into the cable fixing clip before connecting the X-axis
+ motor
+ 3. Connect the Z-axis motor
+ Tips: Please ensure proper wiring according to the provided diagram and avoid overturning or folding the
+ extruder cable, as it may cause printing abnormalities
+ Filament Loading
+ Manual loading
+1. Before printing, cut the front of the filament at 45° and break it off straight;
+ 2. Gently press the extrusion clamp and insert the straightened filament through the hole to the bottom of the heat
+ break
+ How to Replace the Filament?
+ Withdraw the filaments quickly and feed the new filaments after the nozzle is preheated and filaments are pushed
+ a little forward.
+ 1. Auto feed
+ 2. Auto retreat
+Tips: During the retraction process, there may be some extrusion of filaments, which is a normal phenomenon.
+ Operation and Use
+ Leveling
+ Select “Leveling” with the knob and wait for the completion of the auto leveling operation;
+ Value displayed in green: indicating platform is level;
+ Value displayed in blue: indicating platform is relatively level;
+ Value displayed in yellow: indicating platform is slightly inclined;
+ Value displayed in red: indicating platform is significantly inclined.
+ Tips: Please clean the printing platform before leveling to ensure that there are no foreign objects or filaments left
+ on the printing platform.
+Printer preheating
+ Carry out PLA/TPU preheating by selecting “Prepare” with the knob;
+ Official recommended print parameters for filament
+ Adapted 
+protective
+ Filament
+ cover
+ CR-PLA NO
+ HP-TPU NO
+ CR-PET
+ G
+ Adapted 
+dry box
+ NO
+ NO
+ Drawbac
+ k distanc
+ e
+ 0.8mm
+ Drawbac
+ k speed
+ Max. hot
+ bed temp
+ erature
+ Nozzle te
+ mperatur
+ e
+ Fan spee
+ d
+ 40mm/s 60℃
+ 1.6mm
+ NO
+ YES
+ Software Installation and Slicing
+ 1.2mm
+ 40mm/s 70℃
+ 40mm/s 70℃
+ 205℃
+ 205℃
+ 230℃
+ 100
+ 100
+ 50
+ Install Creality Print slicing software by opening the random data on the storage card.
+ Printing speed
+ 180-250mm/s
+ 50mm/s
+ 120mm/s
+ Login to the website to download and install: https://www.crealitycloud.com/software-firmware/software?
+ type=7
+ 1. Select “Language”  and “Server
+ 2. Add the printer
+ 3. Confirm the  nozzle diameter
+ 4. Import model files
+5. Set filament type
+ 6. Adjust parameter configuration and click on “Slice”
+ 7. After the slicing is completed, gcode files are generated, then click “Export to Local” to save it to the storage
+ card;
+ Printing Files
+ 1. Insert the storage card into the card slot;
+ 2. Select “Print”;
+ 3. Select the file to be printed;
+Note:
+ 1. For details on using the software, please refer to the slicing software user manual on the memory
+ 2. Saved files must be placed in the root directory (not a subdirectory) of the memory
+ 3. The file name must be Latin letters or numbers, not Chinese characters or other special symbols, and no more
+ than 20
+ 4. Do not insert or remove the memory card during the printing
+ If the first layer of printing effect is overpressure or does not stick to the platform, you need to use the knob to
+ select the setting, adjust the Z axis compensation, so that the printing platform and the nozzle fit as much as
+ possible, and click OK to start printing
+ Printing…
+Printing can be paused in the event of an unexpected situation during printing
+ Click on “OK” when printing is done.
+ Equipment Maintenance
+ Platform plate removal and maintenance
+ 1. When printing is finished, wait for the platform plate to cool before removing the printing platform with the
+ model attached;
+ Slightly bend the platform with both hands to separate the model from the platform.”
+ 2. If there are residual filaments on the platform plate, scrape them off lightly with a blade and print again.
+ 3. If the first layer of the model is not properly glued, it is recommended to apply solid adhesive evenly on the
+ surface of the platform plate before preheating for printing.
+ Tips:
+ 1. The printing platform is not easy to bend too large in daily use, and it is impossible to prevent deformation from
+ being unusable;
+ 2. The printing platform is a perishable part, and it is recommended to replace it regularly to ensure that the first
+ layer of the model sticks properly.
+ Screw and smooth shaft lubrication
+ It is recommended to purchase your own lubricant and regularly lubricate and maintain the screw and smooth
+ shaft.
+Nozzle Replacement
+ 1. Remove the silicone protective cover;
+ 2. Remove the old nozzle;
+ 3. Mount a new nozzle;
+ 4. Mount the silicone protective cover.
+ Warnings:
+ 1. To replace the nozzle, you need to preheat the nozzle first;
+ 2. Prevent scalding when replacing nozzles which are hot;
+ 3. Use a tool to hold the heating block in place when removing the nozzle to avoid damage to the components.
+ Troubleshooting
+ No. Description of the proble
+ m
+ Possible causes
+ 1) Filaments not loaded in place
+ 1
+ No extrusion of filaments a
+ s printing begins
+ 2) Extruder planning
+ 3) Filament jamming
+2 Insufficient extrusion
+ 1) Incorrect diameter of filaments;
+ 2) Flow rate is too low, please readjust slicing parameters.
+ 3 Holes or gaps in the top
+ 1) Inadequate number of solid layers at the top;
+ 2) Too low infill density;
+ 3) Insufficient extrusion.
+ 
+4
+ 
+Wire drawing or draping
+ 1) Too little drawback distance;
+ 2) Slow drawback speed;
+ 3) Extruder temperature too high;
+ 4) Too long idle running distance.
+ 5 Why does warping occur?
+ 1) Hotbed temperature is too low;
+ 2) Model cooling fan disabled, cooling fan needs to be restarted;
+ 3) Base area of the model is too small, it is required to increase the edges 
+and base.
+ 6 Why does the hotbed not 
+heat up?
+ 1) Check the hotbed heating cable for broken or loose connections and re
+enforce or replace with new wiring;
+ 2) Contact after-sales staff to resolve.
+ 
+7
+ 
+What can I do if there is no
+ response when the
+ memory
+ card is inserted into the m
+ achine?
+ 1) Corrupt print file, re-slice it;
+ 2) The print file is too long, it is better to keep it to 8 letters or less;
+ 3) If the file name is not English/numeric, insert the card into the machine a
+ nd restart it;
+ 4) Format the storage card;
+ 5) TF card / mainboard card slot is damaged, contact after-sales service to 
+assist in testing.
+ 8
+ What can I do about loose 
+X-axis and
+ Y-axis belts?
+ Tighten the X-axis and Y-axis adjustment screws with a tool and keep the b
+ elt with a certain amount of spring back and then start printing again.
+ 9
+ How to deal with abnormal
+ nozzle temperatures (too l
+ ow/too high)?
+ 1) Check nozzle NTC wire for open circuit (too low temperature) / short circ
+ uit (too high temperature).
+ 2) Check the nozzle heating block for abnormalities.
+ 3) Replace the nozzle thermistor.
+10
+ How to deal with abnormal
+ hotbed temperatures (too l
+ ow/too high)?
+ 1) Check hotbed NTC wire for open circuit (too low temperature) / short circ
+ uit (too high temperature).
+ 2) Check the hotbed heating system for abnormalities.
+ 3) Replace the hotbed thermistor.
+ Equipment Parameters
+ Model Ender-3 V3 SE
+ Modeling Technolog FDM
+ Modeling
+ Dimensions 220*220*250mm
+ Leveling Method Auto-leveling with CR-Touch
+ Number of Nozzles 1pcs
+ Extruder Diameter 0.4 mm (standard)
+ Slice Thickness 0.1-0.35mm
+ Precision ±0.1mm
+ typical printing spee
+ d 180mm/s
+ Maximum printing s
+ peed 250mm/s
+ Acceleration 2500mm/s²
+ Nozzle Temperature ≤ 260℃
+ Hotbed Temperatur
+ e ≤ 100℃
+ Ambient Temperatur
+ e 5℃~35℃
+ Filaments PLA/TPU(95A)/PETG
+ Rated Power 350W
+ Input voltage 100-120V~, 200-240V~, 50/60Hz
+ Power Loss Recove
+ ry Yes
+ Printing Method Storage card printing
+ File Format STL/OBJ/AMF
+ Slicing Software Creality print/Cura/ Repetier-Host/Simplify3D
+ Operating Systems Windows/MAC/Linux
+ Language / English/ Español/ Deutsche/ Français/ Pусский/ Português/ Italiano/ Türk/ 
+Circuit Wiring
+ Due to the differences between different machine models, the actual objects and the images can differ. Please
+ refer to the actual machine. The final explanation rights shall be reserved by Shenzhen Creality 3D Technology
+ Co., Ltd.
+ 18th Floor, JinXiuHongDu Building, Meilong Road, Xinniu Community, Minzhi Street, Longhua District, Shenzhen
+ City, China.
+ Official Website: www.creality.com
+ Tel: +86 755-8523 4565
+ E–mail: cs@creality.com
+ Documents / Resources
+ CREALITY Ender-3 V3 SE 3D Printer
+ [pdf] User Manual
+ Ender-3 V3 SE 3D Printer, Ender-3 V3 SE, 3D Printer, Printer
+Manuals+
+ ,
