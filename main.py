@@ -36,9 +36,7 @@ db_briefings = banco["briefings_coca"]
 with open('data.txt', 'r') as file:
     conteudo = file.read()
 
-tab_chatbot = st.tabs([
-    "💬 Chatbot Agente Coca Cola", 
-])
+tab_chatbot = st.tabs(   "💬 Chat Impressora 3d")
 
 
 with tab_chatbot:  
