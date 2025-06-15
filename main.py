@@ -1,177 +1,103 @@
-import os
-import requests
 import streamlit as st
-from dotenv import load_dotenv
-import openai
-from typing import List, Dict
+import io
+import google.generativeai as genai
+from PIL import Image
+import requests
+import datetime
+import os
+from pymongo import MongoClient
+import requests
 
-# Carrega variáveis de ambiente
-load_dotenv()
 
-# Configurações
-EMBEDDING_MODEL = "text-embedding-3-small"
-CHAT_MODEL = "gpt-4"  # Changed from "gpt-4o-mini" as this doesn't exist
-COLLECTION_NAME = os.getenv("ASTRA_DB_COLLECTION")
-NAMESPACE = os.getenv("ASTRA_DB_NAMESPACE", "default_keyspace")
-EMBEDDING_DIMENSION = 1536
-ASTRA_DB_API_BASE = os.getenv("ASTRA_DB_API_ENDPOINT")
-ASTRA_DB_TOKEN = os.getenv("ASTRA_DB_APPLICATION_TOKEN")
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
-# Configura a API da OpenAI
-openai.api_key = OPENAI_API_KEY
 
-class AstraDBClient:
-    def __init__(self):
-        self.base_url = f"{ASTRA_DB_API_BASE}/api/json/v1/{NAMESPACE}"
-        self.headers = {
-            "Content-Type": "application/json",
-            "x-cassandra-token": ASTRA_DB_TOKEN,
-            "Accept": "application/json"
-        }
-    
-    def vector_search(self, collection: str, vector: List[float], limit: int = 3) -> List[Dict]:
-        """Realiza busca por similaridade vetorial"""
-        url = f"{self.base_url}/{collection}"
-        payload = {
-            "find": {
-                "sort": {"$vector": vector},
-                "options": {"limit": limit}
-            }
-        }
-        try:
-            response = requests.post(url, json=payload, headers=self.headers, timeout=10)
-            response.raise_for_status()
-            return response.json()["data"]["documents"]
-        except Exception as e:
-            st.error(f"Erro na busca vetorial: {str(e)}")
-            st.error(f"Resposta da API: {response.text if 'response' in locals() else 'N/A'}")
-            return []
 
-def get_embedding(text: str) -> List[float]:
-    """Obtém embedding do texto usando OpenAI"""
-    try:
-        response = openai.Embedding.create(
-            input=text,
-            model=EMBEDDING_MODEL
-        )
-        return response["data"][0]["embedding"]
-    except Exception as e:
-        st.error(f"Erro ao obter embedding: {str(e)}")
-        return []
+st.header('Agente Impressora 3d')
+st.header(' ')
 
-def generate_response(query: str, context: str) -> str:
-    """Gera resposta usando o modelo de chat da OpenAI"""
-    if not context:
-        return "Não encontrei informações relevantes para responder sua pergunta."
-    
-    prompt = f"""Responda baseado no contexto abaixo:
-    
-    Contexto:
-    {context}
-    
-    Pergunta: {query}
-    Resposta:"""
-    
-    try:
-        response = openai.ChatCompletion.create(
-            model=CHAT_MODEL,
-            messages=[
-                {"role": "system", "content": '''
-Você é copiloto do laboratório de pesquisa em sistemas de vibrações dinâmicos LASID. 
-Extraia de sua base de informações tudo de relevante para o uso do microlog. 
-Você deve ser capaz de ajudar o usuário a atingir todos os seus objetivos.
-                '''},
-                {"role": "user", "content": prompt}
-            ],
-            temperature=0.7
-        )
-        return response["choices"][0]["message"]["content"]
-    except Exception as e:
-        return f"Erro ao gerar resposta: {str(e)}"
 
-def read_kb_file():
-    """Reads and returns the content of data.txt"""
-    try:
-        with open("data.txt", "r", encoding="utf-8") as file:
-            return file.read()
-    except FileNotFoundError:
-        st.warning("Arquivo data.txt não encontrado.")
-        return ""
-    except Exception as e:
-        st.error(f"Erro ao ler arquivo data.txt: {str(e)}")
-        return ""
 
-def kb_tab():
-    """Knowledge Base tab that reads from data.txt"""
-    st.header("Base de Conhecimento (data.txt)")
-    
-    # Display the content of data.txt
-    kb_content = read_kb_file()
-    
-    if kb_content:
-        st.subheader("Conteúdo do Arquivo:")
-        st.text_area("Conteúdo", kb_content, height=300)
-        
-        # Allow user to query against the KB
-        st.subheader("Consultar a Base de Conhecimento")
-        query = st.text_input("Digite sua pergunta sobre o conteúdo:")
-        
-        if query:
-            # Generate response using the KB content as context
-            response = generate_response(query, kb_content)
-            st.subheader("Resposta:")
-            st.write(response)
-    else:
-        st.info("Adicione um arquivo data.txt com informações para criar uma base de conhecimento.")
 
-def chat_tab():
-    """Main chat tab with vector search functionality"""
-    st.title("🤖 NeIA")
-    st.write("Conectado à base de dados")
+gemini_api_key = os.getenv("GEM_API_KEY")
+genai.configure(api_key=gemini_api_key)
+modelo_vision = genai.GenerativeModel("gemini-2.0-flash", generation_config={"temperature": 0.1})
+modelo_texto = genai.GenerativeModel("gemini-1.5-flash")
+
+# Conexão com MongoDB
+client2 = MongoClient("mongodb+srv://gustavoromao3345:RqWFPNOJQfInAW1N@cluster0.5iilj.mongodb.net/auto_doc?retryWrites=true&w=majority&ssl=true&ssl_cert_reqs=CERT_NONE&tlsAllowInvalidCertificates=true")
+db = client2['arquivos_planejamento']
+collection = db['auto_doc']
+banco = client2["arquivos_planejamento"]
+db_clientes = banco["clientes"]  
+db_briefings = banco["briefings_coca"]  
+
+
+# Carrega diretrizes
+with open('data.txt', 'r') as file:
+    conteudo = file.read()
+
+tab_chatbot = st.tabs([
+    "💬 Chatbot Agente Coca Cola", 
+])
+
+
+with tab_chatbot:  
+    st.header("Chat Impressora 3d")
     
-    # Inicializa cliente do Astra DB
-    astra_client = AstraDBClient()
-    
-    # Inicializa histórico de conversa
+    # Inicializa o histórico de chat na session_state
     if "messages" not in st.session_state:
         st.session_state.messages = []
     
-    # Exibe mensagens anteriores
+    # Exibe o histórico de mensagens
     for message in st.session_state.messages:
         with st.chat_message(message["role"]):
             st.markdown(message["content"])
     
-    # Processa nova entrada
-    if prompt := st.chat_input("Digite sua mensagem..."):
-        # Adiciona mensagem do usuário ao histórico
+    # Input do usuário
+    if prompt := st.chat_input("Como posso ajudar?"):
+        # Adiciona a mensagem do usuário ao histórico
         st.session_state.messages.append({"role": "user", "content": prompt})
         with st.chat_message("user"):
             st.markdown(prompt)
         
-        # Obtém embedding e busca no Astra DB
-        embedding = get_embedding(prompt)
-        if embedding:
-            results = astra_client.vector_search(COLLECTION_NAME, embedding)
-            context = "\n".join([str(doc) for doc in results])
-            
-            # Gera resposta
-            response = generate_response(prompt, context)
-            
-            # Adiciona resposta ao histórico
-            st.session_state.messages.append({"role": "assistant", "content": response})
-            with st.chat_message("assistant"):
-                st.markdown(response)
+        # Prepara o contexto com as diretrizes
+        contexto = f"""
+        Você é um assistente virtual especializado no uso da impressora 3d CREALITY Ender-3 V3 SE 3D Printer. Você está aqui
+        para auxiliar os alunos da Cyrus a fazerem uso dela.
+        ####CONTEXTO####
+        {conteudo}
+        ####END CONTEXTO####
 
-def main():
-    # Create tabs
-    tab1, tab2 = st.tabs(["Chat com Vetores", "Base de Conhecimento"])
-    
-    with tab1:
-        chat_tab()
-    
-    with tab2:
-        kb_tab()
 
-if __name__ == "__main__":
-    main()
+        
+        Regras importantes:
+        - Seja preciso e técnico
+        - Mantenha o tom profissional mas amigável
+        - Se a pergunta for irrelevante, oriente educadamente
+        - Forneça exemplos quando útil
+        """
+        
+        # Gera a resposta do modelo
+        with st.chat_message("assistant"):
+            with st.spinner('Pensando...'):
+                try:
+                    # Usa o histórico completo para contexto
+                    historico_formatado = "\n".join(
+                        [f"{msg['role']}: {msg['content']}" for msg in st.session_state.messages]
+                    )
+                    
+                    resposta = modelo_texto.generate_content(
+                        f"{contexto}\n\nHistórico da conversa:\n{historico_formatado}\n\nResposta:"
+                    )
+                    
+                    # Exibe a resposta
+                    st.markdown(resposta.text)
+                    
+                    # Adiciona ao histórico
+                    st.session_state.messages.append({"role": "assistant", "content": resposta.text})
+                    
+                except Exception as e:
+                    st.error(f"Erro ao gerar resposta: {str(e)}")
+
+
+
