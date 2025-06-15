@@ -2,7 +2,7 @@ import os
 import requests
 import streamlit as st
 from dotenv import load_dotenv
-import openai  # Importação compatível com versões mais antigas
+import openai
 from typing import List, Dict
 
 # Carrega variáveis de ambiente
@@ -10,7 +10,7 @@ load_dotenv()
 
 # Configurações
 EMBEDDING_MODEL = "text-embedding-3-small"
-CHAT_MODEL = "gpt-4o-mini"
+CHAT_MODEL = "gpt-4"  # Changed from "gpt-4o-mini" as this doesn't exist
 COLLECTION_NAME = os.getenv("ASTRA_DB_COLLECTION")
 NAMESPACE = os.getenv("ASTRA_DB_NAMESPACE", "default_keyspace")
 EMBEDDING_DIMENSION = 1536
@@ -78,14 +78,9 @@ def generate_response(query: str, context: str) -> str:
             model=CHAT_MODEL,
             messages=[
                 {"role": "system", "content": '''
-                
-Você é copiloto do laboratório de pesquisa em sistemas de vibrações dinâmicos LASID. Extraia de sua base de informações tudo
-de relevante para o uso do microlog. Você deve ser capaz de ajudar o usuário a atingir todos os seus objetivos.
-
-                
-                
-                
-                
+Você é copiloto do laboratório de pesquisa em sistemas de vibrações dinâmicos LASID. 
+Extraia de sua base de informações tudo de relevante para o uso do microlog. 
+Você deve ser capaz de ajudar o usuário a atingir todos os seus objetivos.
                 '''},
                 {"role": "user", "content": prompt}
             ],
@@ -95,7 +90,43 @@ de relevante para o uso do microlog. Você deve ser capaz de ajudar o usuário a
     except Exception as e:
         return f"Erro ao gerar resposta: {str(e)}"
 
-def main():
+def read_kb_file():
+    """Reads and returns the content of data.txt"""
+    try:
+        with open("data.txt", "r", encoding="utf-8") as file:
+            return file.read()
+    except FileNotFoundError:
+        st.warning("Arquivo data.txt não encontrado.")
+        return ""
+    except Exception as e:
+        st.error(f"Erro ao ler arquivo data.txt: {str(e)}")
+        return ""
+
+def kb_tab():
+    """Knowledge Base tab that reads from data.txt"""
+    st.header("Base de Conhecimento (data.txt)")
+    
+    # Display the content of data.txt
+    kb_content = read_kb_file()
+    
+    if kb_content:
+        st.subheader("Conteúdo do Arquivo:")
+        st.text_area("Conteúdo", kb_content, height=300)
+        
+        # Allow user to query against the KB
+        st.subheader("Consultar a Base de Conhecimento")
+        query = st.text_input("Digite sua pergunta sobre o conteúdo:")
+        
+        if query:
+            # Generate response using the KB content as context
+            response = generate_response(query, kb_content)
+            st.subheader("Resposta:")
+            st.write(response)
+    else:
+        st.info("Adicione um arquivo data.txt com informações para criar uma base de conhecimento.")
+
+def chat_tab():
+    """Main chat tab with vector search functionality"""
     st.title("🤖 NeIA")
     st.write("Conectado à base de dados")
     
@@ -131,6 +162,16 @@ def main():
             st.session_state.messages.append({"role": "assistant", "content": response})
             with st.chat_message("assistant"):
                 st.markdown(response)
+
+def main():
+    # Create tabs
+    tab1, tab2 = st.tabs(["Chat com Vetores", "Base de Conhecimento"])
+    
+    with tab1:
+        chat_tab()
+    
+    with tab2:
+        kb_tab()
 
 if __name__ == "__main__":
     main()
