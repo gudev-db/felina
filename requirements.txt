@@ -110,7 +110,7 @@ networkx==3.3
 nltk==3.9.1
 notebook_shim==0.2.4
 numpy==2.2.4
-openai==1.75.0
+openai==0.28
 overrides==7.7.0
 packaging==24.2
 pandas==2.2.3
