@@ -2,7 +2,7 @@ import os
 import requests
 import streamlit as st
 from dotenv import load_dotenv
-import openai  # Importação compatível com versões mais antigas
+from openai import OpenAI  # Importação atualizada para a nova versão
 from typing import List, Dict
 
 # Carrega variáveis de ambiente
@@ -10,7 +10,7 @@ load_dotenv()
 
 # Configurações
 EMBEDDING_MODEL = "text-embedding-3-small"
-CHAT_MODEL = "gpt-4o-mini"
+CHAT_MODEL = "gpt-4o"  # Atualize para o modelo correto que você deseja usar
 COLLECTION_NAME = os.getenv("ASTRA_DB_COLLECTION")
 NAMESPACE = os.getenv("ASTRA_DB_NAMESPACE", "default_keyspace")
 EMBEDDING_DIMENSION = 1536
@@ -18,8 +18,8 @@ ASTRA_DB_API_BASE = os.getenv("ASTRA_DB_API_ENDPOINT")
 ASTRA_DB_TOKEN = os.getenv("ASTRA_DB_APPLICATION_TOKEN")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
-# Configura a API da OpenAI
-openai.api_key = OPENAI_API_KEY
+# Configura o cliente OpenAI
+client = OpenAI(api_key=OPENAI_API_KEY)
 
 class AstraDBClient:
     def __init__(self):
@@ -51,11 +51,11 @@ class AstraDBClient:
 def get_embedding(text: str) -> List[float]:
     """Obtém embedding do texto usando OpenAI"""
     try:
-        response = openai.Embedding.create(
+        response = client.embeddings.create(
             input=text,
             model=EMBEDDING_MODEL
         )
-        return response["data"][0]["embedding"]
+        return response.data[0].embedding
     except Exception as e:
         st.error(f"Erro ao obter embedding: {str(e)}")
         return []
@@ -74,23 +74,18 @@ def generate_response(query: str, context: str) -> str:
     Resposta:"""
     
     try:
-        response = openai.ChatCompletion.create(
+        response = client.chat.completions.create(
             model=CHAT_MODEL,
             messages=[
                 {"role": "system", "content": '''
-                
-Você é um especialista em marketing digital. Com base na sua base de conhecimentos, ajude o usuário a encontrar a melhor estratégia para proceder.
-
-                
-                
-                
-                
+                Você é um especialista em marketing digital. Com base na sua base de conhecimentos, 
+                ajude o usuário a encontrar a melhor estratégia para proceder.
                 '''},
                 {"role": "user", "content": prompt}
             ],
             temperature=0.7
         )
-        return response["choices"][0]["message"]["content"]
+        return response.choices[0].message.content
     except Exception as e:
         return f"Erro ao gerar resposta: {str(e)}"
 
