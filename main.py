@@ -78,8 +78,9 @@ def generate_response(query: str, context: str) -> str:
             model=CHAT_MODEL,
             messages=[
                 {"role": "system", "content": '''
-                Você é um especialista em marketing digital. Com base na sua base de conhecimentos, 
-                ajude o usuário a encontrar a melhor estratégia para proceder.
+                Você é um co piloto de atuação no setor de indústria e a sua missão é guiar o usuário de uma forma que ele
+                consiga utilizar as ferramentas à sua disposição da melhor forma possível. Você possui acesso à uma base de dados
+                que contém manuais de manuseio de diversas ferramentas.
                 '''},
                 {"role": "user", "content": prompt}
             ],
