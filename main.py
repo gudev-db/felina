@@ -90,7 +90,7 @@ def generate_response(query: str, context: str) -> str:
         return f"Erro ao gerar resposta: {str(e)}"
 
 def main():
-    st.title("🤖 NeIA")
+    st.title("Manual Inteligente")
     st.write("Conectado à base de dados")
     
     # Inicializa cliente do Astra DB
